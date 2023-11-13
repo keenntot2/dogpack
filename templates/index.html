@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Dogpack
+{% endblock %}
+
+{% block session %}
+    <div class="wrapper-index">
+        {% if posts %}
+            {% for row in posts %}
+                <div class="posts" id="{{ row['post_id'] }}">
+                    <div class="delete_post">
+                        <!--<img src="/static/icons/fill_delete_400weight.svg" alt="" id="morePost{{ row['post_id'] }}">-->
+                        <span class="material-symbols-outlined post_deleteButton" id="morePost{{ row['post_id'] }}">
+                            delete
+                        </span>
+                    </div>
+                    <img src="static/images/{{ row['user_id'] }}/{{ row['photo'] }}" alt="">
+                    <div class="info_bar">  
+                        <a href="/profile/{{ username_post[row['post_id']] }}">
+                            <p class="post_name">{{ row['firstname'] }} {{ row['surname'] }} </p>
+                        </a>                           
+                        <p class="post_time" id="postTime{{ row['post_id'] }}">{{ timeago(row['post_date'], row['post_time']) }}</p>
+                    </div>
+                    {% if row['caption'] %}
+                        <p class="post_caption">{{ row['caption'] }}</p>
+                    {% endif %}
+                    <div class="post-likeDiv">
+                        <div class="post-like-button">
+                            <img class="like-post" id="like-postID{{ row['post_id'] }}" src="/static/icons/hollow_beer_300weight.svg" alt="">
+                            <img class="unlike-post" id="unlike-postID{{ row['post_id'] }}" src="/static/icons/fill_beer_300weight.svg" alt="">                          
+                        </div>     
+                        <div class="likes-countDiv">
+                            <p class="likes-count" id="post_likes_countID{{ row['post_id'] }}">{{ row['post_likes'] }} cheers</p>
+                        </div>               
+                    </div>
+                    <div class="comments" id="commentsID{{ row['post_id'] }}">
+                        <!-- insert comments (javascript) -->
+                    </div>
+                    <p class="add_comment">Add a comment:</p>
+                    <div class="comment_section" id="commentsectionID{{ row['post_id'] }}">
+                        <span role="text" spellcheck="false" name="add_comment" id="spanID{{ row['post_id'] }}" contenteditable="true"></span>
+                        <input name="comment" id="commentPostID{{ row['post_id'] }}" type="text">
+                        <input name="post_id" type="text">
+                        <button id="buttonID{{ row['post_id'] }}">Send</button>
+                    </div>
+                </div>  
+            {% endfor %}
+        {% else %}
+                <h1 class="greetings">Hello, Gaw</h1>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Dogpack | Register
+{% endblock %}
+
+{% block body %}
+
+    <div class="wrapper-register">
+        <form class="register" action="/register" method="post">
+            <div class="first-name">
+                <label for="first_name">First Name</label>
+                {% if firstname %}
+                    <input autocomplete="off" autofocus name="first_name" placeholder="First Name" value="{{ firstname }}" type="text">
+                {% else %}
+                    <input autocomplete="off" autofocus name="first_name" placeholder="First Name" type="text">
+                {% endif %}
+                {% if error %}
+                    {% if error["fn"] %}
+                        <p class="flash">{{ error["fn"] }}</p>
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="surname">
+                <label for="surname">Surname</label>
+                {% if surname %}
+                    <input autocomplete="off" autofocus name="surname" placeholder="Surname" value="{{ surname }}" type="text">
+                {% else %}
+                    <input autocomplete="off" autofocus name="surname" placeholder="Surname" type="text">
+                {% endif %}
+                {% if error %}
+                    {% if error["sn"] %}
+                        <p class="flash">{{ error["sn"] }}</p>
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="username">
+                <label for="username">Username</label>
+                {% if username %}
+                    <input autocomplete="off" autofocus name="username" placeholder="Username" value="{{ username }}" type="text">
+                {% else %}
+                    <input autocomplete="off" autofocus name="username" placeholder="Username" type="text">
+                {% endif %}
+                {% if error %}
+                    {% if error["un"] %}
+                        <p class="flash">{{ error["un"] }}</p>
+                    {% elif error["min_username"] %}
+                        <p class="flash">{{ error["min_username"] }}</p>
+                    {% elif error["existing_un"] %}
+                        <p class="flash">{{ error["existing_un"] }}</p>
+                    {% endif %}
+                {% else %}
+                    <li>Username must at least be 6 characters</li>
+                {% endif %}
+            </div>
+            <div class="password">
+                <label for="password">Password</label>
+                <input autocomplete="off" autofocus name="password" placeholder="Password" type="password">
+                {% if error %}
+                    {% if error["pw"] %}
+                        <p class="flash">{{ error["pw"] }}</p>
+                    {% elif error["min_pass"] %}
+                        <p class="flash">{{ error["min_pass"] }}</p>
+                    {% endif %}
+                {% else %}
+                    <li class="min_pass">Password must at least be 6 characters.</li>
+                {% endif %}
+            </div>
+            <div class="confirmationpassword">
+                <label for="confirmationpassword">Confirm Password</label>
+                <input autocomplete="off" autofocus name="confirmation_password" placeholder=" Confirm Password" type="password">
+                {% if error %}
+                    {% if error["cp"] %}
+                        <p class="flash">{{ error["cp"] }}</p>
+                    {% elif error["confirm_pass"] %}
+                        <p class="flash">{{ error["confirm_pass"] }}</p>
+                    {% endif %}
+                {% endif %}
+            </div>
+            <input type="submit" value="Register">
+        </form>
+    </div>
+
+{% endblock %}

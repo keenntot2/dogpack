@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Dogpack | Add Photo
+{% endblock %}
+
+{% block session %}
+    <div class="wrapper-addphoto">
+        <div class="addphotolabel">
+            <label for="photo">
+                <span class="material-symbols-outlined add">
+                    add
+                </span>
+            </label>
+        </div>
+        <form>
+            <label for="photo">
+                <!-- <span class="material-symbols-outlined cancel"> -->
+                   <!-- cancel -->
+                <!-- </span> -->
+                <img src="/static/icons/gallery.svg" class="change_pic" alt="">
+            </label>
+            <div class="photo">
+                <input type="file" accept="image/jpg, image/jpeg, image/png, image/gif image/svg" name="photo" id="photo">
+                <img src="" alt="" >
+            </div>
+            <div class="caption">
+                <span class="inputcaption" role="text" spellcheck="false" contenteditable="true"></span>
+            </div>
+            <div class="submit">
+                <input type="submit" value="Post">
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Dogpack | {{ username_name[username] }}
+{% endblock %}
+
+{% block session %}
+
+    <div class="wrapper-profile">
+        <div class="container-profile">
+            <div class="profile-info">
+                <div class="profile-pic">
+                    <input type="file" accept="image/jpg, image/jpeg, image/png, image/gif image/svg" id="pp-photo">
+                    <img src="{{dp[username]}}" class="pp" alt="">
+                    <label for="pp-photo">
+                        <img src="/static/icons/fill_camera_400weight.svg" class="camera-svg" alt="">
+                    </label>                
+                </div>
+                <div class="name">
+                    <p>{{ username_name[username] }}</p>
+                </div>
+                <div class="settings">
+                    <img src="/static/icons/fill_settings_weight400.svg" alt="">
+                    <div class="settingsShow">
+                        <a href="/settings/change-password" class="change-password">Change password</a>
+                        <a class="settings-logout" href="/logout">Log out</a>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-images">
+                <div class="imgContainer">
+                    {% if post_images %}
+                    {% for images in post_images %}
+                        {% if images['username'] == username %}
+                        <div class="eachImgContainer" id="eachImgContainerID{{ images['post_id'] }}">
+                            <img class="profilePhoto-display" src="/static/images/{{images['id']}}/{{ images['photo'] }}" id="profileImgID{{ images['post_id'] }}" alt="">
+                            <div class="imgInfo" id="imgInfoID{{ images['post_id'] }}">
+                                <div class="no_comment_icon">
+                                    <p class="no_comments"></p>
+                                    <svg aria-label="Comment" 
+                                        height="24" 
+                                        role="img" 
+                                        viewBox="0 0 24 24" 
+                                        width="24">
+                                        <path d="M20.656 17.008a9.993 9.993 0 1 0-3.59 3.615L22 22Z" 
+                                            fill="none" 
+                                            stroke="rgba(255, 255, 255, 0.747)" 
+                                            stroke-linejoin="round" 
+                                            stroke-width="2">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="no_likes_icon">
+                                    <p class="no_likes"></p>
+                                    <span class="material-symbols-outlined">
+                                        sports_bar
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- shows post on click -->
+        <div class="profile-post-wrapper">
+            <div class="profile-post">      
+            </div>
+        </div>
+        
+    </div>
+    <!-- hidden divs (show on clik) -->
+    <div class="wrapper-ppedit">
+        <div class="pp-edit">
+            <div class="ppedit_closebutton">
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </div>
+            <img src="" alt="">
+            <button>Upload</button>
+        </div>
+    </div>
+{% endblock %}

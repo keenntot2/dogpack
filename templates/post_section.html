@@ -1,0 +1,50 @@
+{% if posts %}
+    {% for row in posts %}
+        <div class="posts" id="{{ row['post_id'] }}">
+            <img src="static/images/{{ row['user_id'] }}/{{ row['photo'] }}" alt="">
+            <div class="info_bar">
+                <p class="post_name">{{ row['firstname'] }} {{ row['surname'] }} </p>
+                <p class="post_time">{{ timeago(row['post_date'], row['post_time']) }}</p>
+            </div>
+            {% if row['caption'] %}
+                <p class="post_caption">{{ row['caption'] }}</p>
+            {% endif %}
+            <!--<hr>-->
+            <div class="post-likeDiv">
+                <!--<p class="post-like-button">LIKE</p>-->
+                <div class="post-like-button">
+                    <img class="like-post" id="like-postID{{ row['post_id'] }}" src="/static/icons/hollow_beer_300weight.svg" alt="">
+                    <img class="unlike-post" id="unlike-postID{{ row['post_id'] }}" src="/static/icons/fill_beer_300weight.svg" alt="">                          
+                </div>     
+                <div class="likes-countDiv">
+                    <p class="likes-count" >{{ row['post_likes'] }} cheers!</p>
+                </div>               
+            </div>
+            <div class="comments">
+                {% if comments %}
+                    {% for comment in comments %}
+                        {% if comment['post_id'] == row['post_id'] %}
+                            <div class="sub_comments" id="subCommentsID{{comment['comment_id']}}">
+                                <div class="commentDiv" id="commentDivID{{comment['comment_id']}}">
+                                    <p class="comment_name">{{ comment['firstname'] }} {{ comment['surname'] }}</p>
+                                    <p class="comment" role="text">{{ comment['comment'] }}</p>
+                                </div>
+                                <div class="likeDiv">
+                                    <p class="like_button">like</p>
+                                    <p class="comment_time" id="commentTime{{ comment['comment_id'] }}">{{ timeago(comment['comment_date'], comment['comment_time']) }}</p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <p class="add_comment">Add a comment:</p>
+            <div class="comment_section" id="commentsectionID{{ row['post_id'] }}">
+                <span role="text" spellcheck="false" name="add_comment" id="spanID{{ row['post_id'] }}" contenteditable="true"></span>
+                <input name="comment" id="commentPostID{{ row['post_id'] }}" type="text">
+                <input name="post_id" type="text">
+                <button id="buttonID{{ row['post_id'] }}">Send</button>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

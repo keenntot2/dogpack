@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Dogpack | Log in
+{% endblock %}
+
+{% block body %}
+
+    <div class="wrapper-login">
+        <form class="login" action="/login" method="post">
+            <div class="webname">
+                <img src="/static/dogpack.jpg" alt="DogPack">
+            </div>
+            <div class="username">
+                {% if error %}
+                    {% if not error["un_notfound"] %}
+                        <input autocomplete="off" autofocus name="username" placeholder="Username" value="{{ username }}" type="text">
+                    {% else %}
+                        <input autocomplete="off" autofocus name="username" placeholder="Username" type="text">
+                    {% endif %}
+                {% else %}
+                    <input autocomplete="off" autofocus name="username" placeholder="Username" type="text">
+                {% endif  %}
+                {% if error %}
+                    {% if error["un_notfound"] %}
+                        <p class="flash">{{ error["un_notfound"] }}</p>
+                    {% endif %}
+                {% endif %}    
+            </div>
+            <div class="password">
+                <input autocomplete="off" autofocus name="password" placeholder="Password" type="password">
+                {% if error %}
+                    {% if error["incorrect_pw"] %}
+                        <p class="flash">{{ error["incorrect_pw"] }}</p>
+                    {% endif %}
+                {% endif %}    
+            </div>
+            <input type="submit" value="Log in">
+            <hr>
+            <a href="/register">Create New Account</a>
+        </form>
+    </div>
+
+{% endblock %}
